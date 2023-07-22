@@ -16,6 +16,7 @@ public class DriverInfoService {
   ArrayList<DriverInfo> driverInfoList;
 
   public void updateDriverInfo(DriverInfo driverInfo){
+
       driverInfoList.add(driverInfo);
   }
 
