@@ -1,41 +1,48 @@
 package com.example.demo.controller;
 
+import com.example.demo.helper.ApiResponseBody;
 import com.example.demo.model.DriverInfo;
 import com.example.demo.service.DriverInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Driver;
-import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class DriverInfoController {
 
     @Autowired
-    DriverInfoService driverInfo;
+    private DriverInfoService driverInfoService;
 
-    @GetMapping("/driverInfo")
-    public ArrayList<DriverInfo> getAllDriverRecords(){
-        return driverInfo.getAllDriverInfo();
+    @PostMapping("/addDriverInfo")
+    public ResponseEntity<DriverInfo> addDriverInfo(@RequestBody DriverInfo driverInfo){
+        DriverInfo d = this.driverInfoService.addDriverInfo(driverInfo);
+        return new ResponseEntity<>(d, HttpStatus.CREATED);
     }
 
-    @PostMapping("/driverInfo")
-    public void updateDriverInfo(DriverInfo driverInformation){
-        updateDriverInfo(driverInformation);
+    @DeleteMapping("/deleteDriverInfo/{id}")
+    public ResponseEntity<ApiResponseBody> deleteDriverInfo(@PathVariable long id){
+        String response = this.driverInfoService.deleteDriverInfo(id);
+        return new ResponseEntity<>(new ApiResponseBody(response, true), HttpStatus.OK);
     }
 
-    @DeleteMapping("/driverInfo/{driversLicence}")
-    public void deleteDriverInfo(@PathVariable String driversLicence){
-        for(int i = 0; i < driverInfo.getDriverInfoList().size(); i++){
-            if(driversLicence == driverInfo.getDriverInfoList().get(i).getDriversLicence()){
-                driverInfo.getDriverInfoList().remove(i);
-            }
-        }
+    @GetMapping("/getDriverInfo")
+    public List<DriverInfo> getUsers(){
+        return this.driverInfoService.getDriversInfo();
     }
 
-    @GetMapping("driverInfo/{driversLicence}")
-    public DriverInfo getDriverInfo(@PathVariable String driversLicence){
-        return getDriverInfo(driversLicence);
+    @PutMapping("/updateDriverInfo/{id}")
+    public ResponseEntity<DriverInfo> updateDriverInfo(@RequestBody DriverInfo driverInfo,@PathVariable long id){
+        DriverInfo d = this.driverInfoService.updateDriverInfo(driverInfo, id);
+        return new ResponseEntity<>(d, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getDriverInfo/{id}")
+    public ResponseEntity<DriverInfo> getDriverInfo(@PathVariable long id){
+        DriverInfo d = this.driverInfoService.getDriverInfo(id);
+        return new ResponseEntity<>(d, HttpStatus.OK);
     }
 
 

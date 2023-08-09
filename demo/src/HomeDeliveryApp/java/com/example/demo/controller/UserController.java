@@ -1,40 +1,48 @@
 package com.example.demo.controller;
 
+import com.example.demo.helper.ApiResponseBody;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class UserController {
-    @Autowired
-    UserService userService;
 
-    @GetMapping("/users")
-    public ArrayList<User> getUserList(){
-        return userService.getUsers();
-    }
+   @Autowired
+   private UserService userService;
 
-    @GetMapping("user/{id}")
-    public User getUser(@PathVariable int id){
-        return userService.getUser(id);
-    }
+   @PostMapping("/addUser")
+   public ResponseEntity<User> addUser(@RequestBody User user){
+      User u = this.userService.addUser(user);
+      return new ResponseEntity<>(u, HttpStatus.CREATED);
+   }
 
-    @PostMapping("/user")
-    public void addUser(@RequestBody User user){
-        userService.addUser(user);
-    }
+   @DeleteMapping("/user/{id}")
+   public ResponseEntity<ApiResponseBody> deleteUser(@PathVariable int id){
+      String response = this.userService.deleteUser(id);
+      return new ResponseEntity<>(new ApiResponseBody(response, true), HttpStatus.OK);
+   }
 
-    @PutMapping("user/{id}")
-    public void updateUser(@PathVariable int id, @PathVariable String username){
-       userService.getUser(id).setUsername(username);
-    }
+   @GetMapping("/getUsers")
+   public List<User> getUsers(){
+      return this.userService.getUsers();
+   }
 
-    @DeleteMapping("user/{id}")
-    public void deleteUser(@PathVariable int id){
-        userService.getUserList().remove(id);
-    }
+   @PutMapping("/updateUser/{id}")
+   public ResponseEntity<User> updateUser(@RequestBody User user,@PathVariable int id){
+      User u = this.userService.updateUser(user, id);
+      return new ResponseEntity<>(u, HttpStatus.CREATED);
+   }
+
+   @GetMapping("/getUser/{id}")
+   public ResponseEntity<User> getUser(@PathVariable int id){
+      User u = this.userService.getUser(id);
+      return new ResponseEntity<>(u, HttpStatus.OK);
+   }
 
 }

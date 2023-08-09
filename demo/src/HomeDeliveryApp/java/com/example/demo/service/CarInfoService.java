@@ -1,33 +1,50 @@
 package com.example.demo.service;
 
 import com.example.demo.model.CarInfo;
+import com.example.demo.repository.CarInfoRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
+
 
 @Service
 @Data
 public class CarInfoService {
     @Autowired
-    ArrayList<CarInfo> carInfoList;
+    CarInfoRepository carInfoRepository;
 
-    public ArrayList<CarInfo> getAllCarInfo(){
-        return carInfoList;
+    public CarInfo addCarInfo(CarInfo carInfo){
+        return this.carInfoRepository.save(carInfo);
     }
 
-    public void updateCarInfo(CarInfo carInfo){
-        carInfoList.add(carInfo);
+    public CarInfo getCarInfo(long id){
+        return this.carInfoRepository.findById(id).orElse(null);
     }
 
-    public void deleteCarInfo(String VIN){
-        for(int i = 0; i < carInfoList.size(); i++){
-            if(getCarInfoList().get(i).getVIN() == VIN){
-                carInfoList.remove(i);
-            }
+    public List<CarInfo> getAllCarInfo(){
+        return this.carInfoRepository.findAll();
+    }
+
+
+    public String deleteCarInfo(long id){
+        try{
+            this.carInfoRepository.deleteById(id);
+        } catch(Exception e){
+            e.printStackTrace();
         }
+
+        return "successfully deleted";
     }
 
+    public CarInfo updateCarInfo(CarInfo carInfo, long id){
+        CarInfo c = this.getCarInfo(id);
+        c.setVIN(carInfo.getVIN());
+        c.setUser(carInfo.getUser());
+        c.setMake(carInfo.getMake());
+        c.setModel(carInfo.getModel());
+        return this.carInfoRepository.save(c);
+    }
 
 }

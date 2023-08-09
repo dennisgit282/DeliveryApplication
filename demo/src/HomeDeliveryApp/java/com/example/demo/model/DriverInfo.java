@@ -1,13 +1,23 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class DriverInfo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @OneToOne
+    private User user;
 
     @Column
     String driversLicence;
@@ -18,14 +28,4 @@ public class DriverInfo {
     @Column
     double yearlyEarnings;
 
-    public DriverInfo(){
-
-    }
-
-    public DriverInfo(String driversLicence, double weeklyEarnings, double monthlyEarnings, double yearlyEarnings){
-        this.driversLicence = driversLicence;
-        this.weeklyEarnings = weeklyEarnings;
-        this.monthlyEarnings = monthlyEarnings;
-        this.yearlyEarnings = yearlyEarnings;
-    }
 }

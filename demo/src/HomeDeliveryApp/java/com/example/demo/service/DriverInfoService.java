@@ -1,45 +1,52 @@
 package com.example.demo.service;
 
 import com.example.demo.model.DriverInfo;
+import com.example.demo.repository.DriverInfoRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Driver;
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Data
 public class DriverInfoService {
 
-  @Autowired
-  ArrayList<DriverInfo> driverInfoList;
+    @Autowired
+    private DriverInfoRepository driverRepo;
 
-  public void updateDriverInfo(DriverInfo driverInfo){
+    public DriverInfo addDriverInfo(DriverInfo driverInfo){
+        return this.driverRepo.save(driverInfo);
+    }
 
-      driverInfoList.add(driverInfo);
-  }
+    public List<DriverInfo> getDriversInfo(){
+        return this.driverRepo.findAll();
+    }
 
-  public ArrayList<DriverInfo> getAllDriverInfo(){
-      return driverInfoList;
-  }
+    public DriverInfo getDriverInfo(long id){
+        return this.driverRepo.findById(id).orElse(null);
+    }
 
-  public void deleteDriverInfo(String driversLicence){
-      for(int i = 0; i < driverInfoList.size(); i++){
-          if(driverInfoList.get(i).getDriversLicence() == driversLicence){
-              driverInfoList.remove(i);
-          }
-      }
-  }
+    public DriverInfo updateDriverInfo(DriverInfo driverInfo, long id){
+        DriverInfo d = this.getDriverInfo(id);
+        d.setDriversLicence(driverInfo.getDriversLicence());
+        d.setMonthlyEarnings(driverInfo.getMonthlyEarnings());
+        d.setWeeklyEarnings(driverInfo.getWeeklyEarnings());
+        d.setYearlyEarnings(driverInfo.getYearlyEarnings());
+        d.setUser(driverInfo.getUser());
+        return this.driverRepo.save(d);
+    }
 
-  public DriverInfo getDriverInfo(String driversLicence){
-      for(int i = 0; i < driverInfoList.size(); i++){
-          if(driverInfoList.get(i).getDriversLicence() == driversLicence){
-              return driverInfoList.get(i);
-          }
-      }
-      return null;
-  }
+
+
+    public String deleteDriverInfo(long id){
+        try {
+            this.driverRepo.delete(this.getDriverInfo(id));
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return "successfully deleted";
+    }
 
 
 }

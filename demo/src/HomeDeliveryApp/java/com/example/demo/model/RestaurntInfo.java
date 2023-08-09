@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,20 +11,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarInfo {
+public class RestaurntInfo {
+
+    @Column
+    private String restaurantName;
+
+    @Column
+    private String foodType;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
-    @OneToOne
-    private User user;
-
-    @Column
-    private String make;
-    @Column
-    private String model;
-    @Column
-    private String VIN;
+    private int restaurantId;
 
 }

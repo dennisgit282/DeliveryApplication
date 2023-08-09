@@ -1,38 +1,32 @@
 package com.example.demo.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.sql.Driver;
+import lombok.NoArgsConstructor;
 
 
 @Entity
 @Table
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Column(nullable = false)
     private String username;
 
-    @Autowired
+    @OneToOne(mappedBy = "user")
+    DriverInfo driverInfo;
+
+    @OneToOne(mappedBy =  "user")
     CarInfo carInfo;
 
-    @Autowired
-    DriverInfo driverInfo;
+    @Column
+    private String role;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
 
-    public User(){
-
-    }
-
-    public User(String username, int id, CarInfo carInfo, DriverInfo driverInfo){
-        this.username = username;
-        this.id = id;
-        this.carInfo = carInfo;
-        this.driverInfo = driverInfo;
-    }
 
 }

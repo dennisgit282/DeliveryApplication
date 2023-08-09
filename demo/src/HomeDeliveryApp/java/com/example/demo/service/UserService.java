@@ -1,34 +1,44 @@
 package com.example.demo.service;
 
 import com.example.demo.model.User;
-import jakarta.persistence.Column;
+import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import lombok.Data;
+import java.util.List;
+
 
 @Service
-@Data
 public class UserService {
+
     @Autowired
-    ArrayList<User> userList = new ArrayList<>();
+    private UserRepository userRepo;
 
-    @Column
-    User user;
-
-    public void addUser(User user){
-        userList.add(user);
+    public User addUser(User user){
+        return this.userRepo.save(user);
     }
 
-    public ArrayList<User> getUsers(){
-        return userList;
+    public List<User> getUsers(){
+        return this.userRepo.findAll();
     }
 
     public User getUser(int id){
-        if(id > userList.size()|| id < 1){
-            return null;
+       return this.userRepo.findById(id).orElse(null);
+    }
+
+    public User updateUser(User user, int id){
+        User u = this.getUser(id);
+        u.setUsername(user.getUsername());
+        u.setRole(user.getRole());
+        return this.userRepo.save(u);
+    }
+
+    public String deleteUser(int id){
+        try {
+            this.userRepo.delete(this.getUser(id));
+        } catch(Exception e){
+            e.printStackTrace();
         }
-        return userList.get(id);
+        return "successfully deleted";
     }
 
 
