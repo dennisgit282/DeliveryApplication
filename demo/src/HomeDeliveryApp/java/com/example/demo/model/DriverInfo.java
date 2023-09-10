@@ -16,8 +16,8 @@ public class DriverInfo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne
-    private User user;
+    @OneToOne(mappedBy = "user")
+    private DriverInfo driverInfo;
 
     @Column
     String driversLicence;

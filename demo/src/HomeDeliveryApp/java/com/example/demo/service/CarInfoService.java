@@ -41,7 +41,6 @@ public class CarInfoService {
     public CarInfo updateCarInfo(CarInfo carInfo, long id){
         CarInfo c = this.getCarInfo(id);
         c.setVIN(carInfo.getVIN());
-        c.setUser(carInfo.getUser());
         c.setMake(carInfo.getMake());
         c.setModel(carInfo.getModel());
         return this.carInfoRepository.save(c);

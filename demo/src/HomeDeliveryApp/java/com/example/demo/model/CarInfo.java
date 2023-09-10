@@ -16,8 +16,8 @@ public class CarInfo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne
-    private User user;
+    @OneToOne(mappedBy = "user")
+    private CarInfo carInfo;
 
     @Column
     private String make;

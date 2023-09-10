@@ -33,7 +33,6 @@ public class DriverInfoService {
         d.setMonthlyEarnings(driverInfo.getMonthlyEarnings());
         d.setWeeklyEarnings(driverInfo.getWeeklyEarnings());
         d.setYearlyEarnings(driverInfo.getYearlyEarnings());
-        d.setUser(driverInfo.getUser());
         return this.driverRepo.save(d);
     }
 
