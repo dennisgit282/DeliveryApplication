@@ -42,5 +42,4 @@ public class CarInfoController {
         return new ResponseEntity<>(c, HttpStatus.CREATED);
     }
 
-
 }
