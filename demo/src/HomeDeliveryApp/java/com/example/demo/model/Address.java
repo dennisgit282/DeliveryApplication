@@ -1,31 +1,28 @@
 package com.example.demo.model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**@Entity
+@Entity
 @Table
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-**/
-public class RestaurantInfo {
-
-    /**
-
-    @Column
-    private String restaurantName;
-
-    @Column
-    private String foodType;
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int restaurantId;
+    private long id;
 
-    **/
+    private String country;
+    private String state;
+    private String city;
+    private String street;
+    private String number;
+    private String zip;
+
+
 
 }

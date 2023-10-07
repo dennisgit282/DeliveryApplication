@@ -5,12 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
 @Entity
 @Table
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+**/
 public class DriverInfo {
+
+    /**
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,5 +31,7 @@ public class DriverInfo {
     double monthlyEarnings;
     @Column
     double yearlyEarnings;
+
+    **/
 
 }

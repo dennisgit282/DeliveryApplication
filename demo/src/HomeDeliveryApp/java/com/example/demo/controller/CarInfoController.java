@@ -11,6 +11,8 @@ import java.util.List;
 
 @RestController
 public class CarInfoController {
+
+    /**
     @Autowired
     private CarInfoService carInfoService;
 
@@ -41,5 +43,6 @@ public class CarInfoController {
         CarInfo c = this.carInfoService.updateCarInfo(carInfo, id);
         return new ResponseEntity<>(c, HttpStatus.CREATED);
     }
+    **/
 
 }
