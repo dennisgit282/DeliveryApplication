@@ -15,17 +15,6 @@ public class User {
     @Column(nullable = false)
     private String username;
 
-
-    /**
-    @OneToOne(mappedBy = "user")
-    DriverInfo driverInfo;
-    **/
-
-    /**
-    @OneToOne(mappedBy =  "user")
-    CarInfo carInfo;
-     **/
-
     @Column
     private String role;
 

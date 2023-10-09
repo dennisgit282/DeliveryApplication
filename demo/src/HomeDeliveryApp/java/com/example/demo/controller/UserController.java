@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class UserController {
 
-   /**
+
    @Autowired
    private UserService userService;
 
@@ -45,6 +45,6 @@ public class UserController {
       User u = this.userService.getUser(id);
       return new ResponseEntity<>(u, HttpStatus.OK);
    }
-   **/
+
 
 }

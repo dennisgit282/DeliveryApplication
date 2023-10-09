@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.DriverInfo;
-//import com.example.demo.repository.DriverInfoRepository;
+import com.example.demo.repository.DriverInfoRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class DriverInfoService {
 
-    /**
+
 
     @Autowired
     private DriverInfoRepository driverRepo;
@@ -49,7 +49,6 @@ public class DriverInfoService {
         return "successfully deleted";
     }
 
-    **/
 
 
 }

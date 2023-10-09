@@ -5,16 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
+import java.util.List;
+
+
 @Entity
 @Table
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-**/
 public class CarInfo {
 
-    /**
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -28,6 +29,5 @@ public class CarInfo {
     private String model;
     @Column
     private String VIN;
-    **/
 
 }

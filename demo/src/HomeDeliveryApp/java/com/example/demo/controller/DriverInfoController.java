@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class DriverInfoController {
 
-    /**
+
 
     @Autowired
     private DriverInfoService driverInfoService;
@@ -47,7 +47,7 @@ public class DriverInfoController {
         return new ResponseEntity<>(d, HttpStatus.OK);
     }
 
-    **/
+
 
 
 

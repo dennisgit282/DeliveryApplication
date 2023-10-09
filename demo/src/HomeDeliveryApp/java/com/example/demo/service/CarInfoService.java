@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.model.CarInfo;
-//import com.example.demo.repository.CarInfoRepository;
+import com.example.demo.repository.CarInfoRepository;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.UserRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,9 @@ import java.util.List;
 @Data
 public class CarInfoService {
 
-    /**
+
     @Autowired
-    CarInfoRepository carInfoRepository;
+    private CarInfoRepository carInfoRepository;
 
     public CarInfo addCarInfo(CarInfo carInfo){
         return this.carInfoRepository.save(carInfo);
@@ -47,6 +49,6 @@ public class CarInfoService {
         c.setModel(carInfo.getModel());
         return this.carInfoRepository.save(c);
     }
-    **/
+    
 
 }

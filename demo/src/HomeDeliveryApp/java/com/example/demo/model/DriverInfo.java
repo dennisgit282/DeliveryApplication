@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 **/
+@Data
 public class DriverInfo {
 
-    /**
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,6 +32,6 @@ public class DriverInfo {
     @Column
     double yearlyEarnings;
 
-    **/
+
 
 }
