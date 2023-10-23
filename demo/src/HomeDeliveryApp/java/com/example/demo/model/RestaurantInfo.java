@@ -6,15 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**@Entity
+@Entity
 @Table
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-**/
 public class RestaurantInfo {
 
-    /**
+
 
     @Column
     private String restaurantName;
@@ -26,6 +25,6 @@ public class RestaurantInfo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int restaurantId;
 
-    **/
+
 
 }
